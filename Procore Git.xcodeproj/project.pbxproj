@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D200178219A26360096F713 /* DataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D200177219A26360096F713 /* DataDownloader.swift */; };
+		4D5B330F21B1BF6E00D0BDF5 /* PullRequestJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5B330E21B1BF6E00D0BDF5 /* PullRequestJSON.swift */; };
+		4D5D96FB21B4A87F00CEDA2A /* PullRequest+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D96F921B4A87F00CEDA2A /* PullRequest+CoreDataClass.swift */; };
+		4D5D96FC21B4A87F00CEDA2A /* PullRequest+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D96FA21B4A87F00CEDA2A /* PullRequest+CoreDataProperties.swift */; };
 		4D89BEA9219889880082B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89BEA8219889880082B9A6 /* AppDelegate.swift */; };
 		4D89BEAC219889880082B9A6 /* Procore_Git.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4D89BEAA219889880082B9A6 /* Procore_Git.xcdatamodeld */; };
 		4D89BEAE219889880082B9A6 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89BEAD219889880082B9A6 /* MasterViewController.swift */; };
@@ -28,6 +32,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D200177219A26360096F713 /* DataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDownloader.swift; sourceTree = "<group>"; };
+		4D5B330E21B1BF6E00D0BDF5 /* PullRequestJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestJSON.swift; sourceTree = "<group>"; };
+		4D5D96F921B4A87F00CEDA2A /* PullRequest+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PullRequest+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4D5D96FA21B4A87F00CEDA2A /* PullRequest+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PullRequest+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4D89BEA5219889880082B9A6 /* Procore Git.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Procore Git.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D89BEA8219889880082B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D89BEAB219889880082B9A6 /* Procore_Git.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Procore_Git.xcdatamodel; sourceTree = "<group>"; };
@@ -60,9 +68,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D5D96FD21B4A88900CEDA2A /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				4D5D96F921B4A87F00CEDA2A /* PullRequest+CoreDataClass.swift */,
+				4D5D96FA21B4A87F00CEDA2A /* PullRequest+CoreDataProperties.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		4D89BE9C219889880082B9A6 = {
 			isa = PBXGroup;
 			children = (
+				4D5D96FD21B4A88900CEDA2A /* CoreData */,
 				4D89BEA7219889880082B9A6 /* Procore Git */,
 				4D89BEC12198898A0082B9A6 /* Procore GitTests */,
 				4D89BEA6219889880082B9A6 /* Products */,
@@ -85,10 +103,12 @@
 				4D89BEAD219889880082B9A6 /* MasterViewController.swift */,
 				4D89BEAF219889880082B9A6 /* DetailViewController.swift */,
 				4D89BEB1219889880082B9A6 /* Main.storyboard */,
+				4D200177219A26360096F713 /* DataDownloader.swift */,
 				4D89BEB42198898A0082B9A6 /* Assets.xcassets */,
 				4D89BEB62198898A0082B9A6 /* LaunchScreen.storyboard */,
 				4D89BEB92198898A0082B9A6 /* Info.plist */,
 				4D89BEAA219889880082B9A6 /* Procore_Git.xcdatamodeld */,
+				4D5B330E21B1BF6E00D0BDF5 /* PullRequestJSON.swift */,
 			);
 			path = "Procore Git";
 			sourceTree = "<group>";
@@ -112,6 +132,7 @@
 				4D89BEA1219889880082B9A6 /* Sources */,
 				4D89BEA2219889880082B9A6 /* Frameworks */,
 				4D89BEA3219889880082B9A6 /* Resources */,
+				4D89BECD2198CBF80082B9A6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -198,13 +219,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4D89BECD2198CBF80082B9A6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# xcode-build-bump.sh\n# @desc Auto-increment the build number every time the project is run.\n# @usage\n# 1. Select: your Target in Xcode\n# 2. Select: Build Phases Tab\n# 3. Select: Add Build Phase -> Add Run Script\n# 4. Paste code below in to new \"Run Script\" section\n# 5. Drag the \"Run Script\" below \"Link Binaries With Libraries\"\n# 6. Insure that your starting build number is set to a whole integer and not a float (e.g. 1, not 1.0)\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4D89BEA1219889880082B9A6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D5D96FC21B4A87F00CEDA2A /* PullRequest+CoreDataProperties.swift in Sources */,
+				4D5B330F21B1BF6E00D0BDF5 /* PullRequestJSON.swift in Sources */,
 				4D89BEA9219889880082B9A6 /* AppDelegate.swift in Sources */,
+				4D200178219A26360096F713 /* DataDownloader.swift in Sources */,
 				4D89BEAC219889880082B9A6 /* Procore_Git.xcdatamodeld in Sources */,
+				4D5D96FB21B4A87F00CEDA2A /* PullRequest+CoreDataClass.swift in Sources */,
 				4D89BEAE219889880082B9A6 /* MasterViewController.swift in Sources */,
 				4D89BEB0219889880082B9A6 /* DetailViewController.swift in Sources */,
 			);

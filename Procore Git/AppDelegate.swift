@@ -13,7 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
-
+    var repo: String?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -44,6 +44,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if repo == nil {
+            let alertController = UIAlertController.init(title: "Repo", message: "Enter user and repo:", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction.init(title: "OK", style: UIAlertAction.Style.default) { (UIAlertAction) in
+                let textFields = alertController.textFields
+                let userText = textFields![0].text
+                let repoText = textFields![1].text
+                self.repo = userText! + "/" + repoText!
+            }
+            
+            alertController.addAction(okAction)
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Enter user here"
+                textField.text = "vmg"
+            }
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Enter repo here"
+                textField.text = "redcarpet"
+            }
+            window!.rootViewController?.present(alertController, animated: true, completion: nil)
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

@@ -28,7 +28,7 @@ class DetailViewController: UIViewController {
         configureView()
     }
 
-    var detailItem: Event? {
+    var detailItem: PullRequest? {
         didSet {
             // Update the view.
             configureView()
