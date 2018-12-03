@@ -11,6 +11,8 @@
 		4D5B330F21B1BF6E00D0BDF5 /* PullRequestJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5B330E21B1BF6E00D0BDF5 /* PullRequestJSON.swift */; };
 		4D5D96FB21B4A87F00CEDA2A /* PullRequest+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D96F921B4A87F00CEDA2A /* PullRequest+CoreDataClass.swift */; };
 		4D5D96FC21B4A87F00CEDA2A /* PullRequest+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D96FA21B4A87F00CEDA2A /* PullRequest+CoreDataProperties.swift */; };
+		4D5D96FF21B4ACF400CEDA2A /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D96FE21B4ACF400CEDA2A /* DataSource.swift */; };
+		4D5D970121B5182100CEDA2A /* PullRequestFilesChangedJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5D970021B5182100CEDA2A /* PullRequestFilesChangedJSON.swift */; };
 		4D89BEA9219889880082B9A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89BEA8219889880082B9A6 /* AppDelegate.swift */; };
 		4D89BEAC219889880082B9A6 /* Procore_Git.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4D89BEAA219889880082B9A6 /* Procore_Git.xcdatamodeld */; };
 		4D89BEAE219889880082B9A6 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D89BEAD219889880082B9A6 /* MasterViewController.swift */; };
@@ -36,6 +38,8 @@
 		4D5B330E21B1BF6E00D0BDF5 /* PullRequestJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestJSON.swift; sourceTree = "<group>"; };
 		4D5D96F921B4A87F00CEDA2A /* PullRequest+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PullRequest+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4D5D96FA21B4A87F00CEDA2A /* PullRequest+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PullRequest+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4D5D96FE21B4ACF400CEDA2A /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		4D5D970021B5182100CEDA2A /* PullRequestFilesChangedJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestFilesChangedJSON.swift; sourceTree = "<group>"; };
 		4D89BEA5219889880082B9A6 /* Procore Git.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Procore Git.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D89BEA8219889880082B9A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D89BEAB219889880082B9A6 /* Procore_Git.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Procore_Git.xcdatamodel; sourceTree = "<group>"; };
@@ -102,13 +106,15 @@
 				4D89BEA8219889880082B9A6 /* AppDelegate.swift */,
 				4D89BEAD219889880082B9A6 /* MasterViewController.swift */,
 				4D89BEAF219889880082B9A6 /* DetailViewController.swift */,
-				4D89BEB1219889880082B9A6 /* Main.storyboard */,
+				4D5D96FE21B4ACF400CEDA2A /* DataSource.swift */,
 				4D200177219A26360096F713 /* DataDownloader.swift */,
+				4D89BEB1219889880082B9A6 /* Main.storyboard */,
 				4D89BEB42198898A0082B9A6 /* Assets.xcassets */,
 				4D89BEB62198898A0082B9A6 /* LaunchScreen.storyboard */,
 				4D89BEB92198898A0082B9A6 /* Info.plist */,
 				4D89BEAA219889880082B9A6 /* Procore_Git.xcdatamodeld */,
 				4D5B330E21B1BF6E00D0BDF5 /* PullRequestJSON.swift */,
+				4D5D970021B5182100CEDA2A /* PullRequestFilesChangedJSON.swift */,
 			);
 			path = "Procore Git";
 			sourceTree = "<group>";
@@ -245,8 +251,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D5D96FC21B4A87F00CEDA2A /* PullRequest+CoreDataProperties.swift in Sources */,
+				4D5D970121B5182100CEDA2A /* PullRequestFilesChangedJSON.swift in Sources */,
 				4D5B330F21B1BF6E00D0BDF5 /* PullRequestJSON.swift in Sources */,
 				4D89BEA9219889880082B9A6 /* AppDelegate.swift in Sources */,
+				4D5D96FF21B4ACF400CEDA2A /* DataSource.swift in Sources */,
 				4D200178219A26360096F713 /* DataDownloader.swift in Sources */,
 				4D89BEAC219889880082B9A6 /* Procore_Git.xcdatamodeld in Sources */,
 				4D5D96FB21B4A87F00CEDA2A /* PullRequest+CoreDataClass.swift in Sources */,

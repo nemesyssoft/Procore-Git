@@ -21,5 +21,6 @@ extension PullRequest {
     @NSManaged public var url: URL?
     @NSManaged public var title: String?
     @NSManaged public var diffURL: URL?
+    @NSManaged public var number: Int32
 
 }

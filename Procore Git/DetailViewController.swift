@@ -7,17 +7,31 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
-
+    @IBOutlet weak var diffTextView: UITextView!
+    var diffText: String!
+    var user: String!
+    var repo: String!
+    var pullRequestNumber: Int!
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                label.text = detail.timestamp!.description
+        if diffText != nil {
+            diffTextView.text = diffText
+        }
+        else if user != nil && repo != nil && pullRequestNumber != nil {
+            let dataDownloader = DataDownloader.init()
+            dataDownloader.downloadPullRequestsFileChanged(user: user, repo: repo, pullRequestNumber: pullRequestNumber) { (pullRequestFilesChangedJSON: PullRequestFilesChangedJSON?, error: Error?) in
+                if error == nil {
+                    for aChangedFile in pullRequestFilesChangedJSON! {
+                        OperationQueue.main.addOperation {
+                            self.diffTextView.text.append(aChangedFile.patch!)
+                        }
+                    }
+                }
             }
         }
     }

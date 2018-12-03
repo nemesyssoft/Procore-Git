@@ -6,19 +6,6 @@
 //  Copyright © 2018 Nemesys Software. All rights reserved.
 //
 
-// To parse the JSON, add this file to your project and do:
-//
-//   let pullRequestJSON = try? newJSONDecoder().decode(PullRequestJSON.self, from: jsonData)
-//
-// To read values from URLs:
-//
-//   let task = URLSession.shared.pullRequestJSONTask(with: url) { pullRequestJSON, response, error in
-//     if let pullRequestJSON = pullRequestJSON {
-//       ...
-//     }
-//   }
-//   task.resume()
-
 import Foundation
 
 typealias PullRequestJSON = [PullRequestJSONElement]
@@ -551,7 +538,7 @@ class JSONAny: Codable {
     }
 }
 
-func newJSONDecoder() -> JSONDecoder {
+func newPullRequestsJSONDecoder() -> JSONDecoder {
     let decoder = JSONDecoder()
     if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
         decoder.dateDecodingStrategy = .iso8601
@@ -559,7 +546,7 @@ func newJSONDecoder() -> JSONDecoder {
     return decoder
 }
 
-func newJSONEncoder() -> JSONEncoder {
+func newPullRequestsJSONEncoder() -> JSONEncoder {
     let encoder = JSONEncoder()
     if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
         encoder.dateEncodingStrategy = .iso8601
@@ -576,7 +563,7 @@ extension URLSession {
                 completionHandler(nil, response, error)
                 return
             }
-            completionHandler(try? newJSONDecoder().decode(T.self, from: data), response, nil)
+            completionHandler(try? newPullRequestsJSONDecoder().decode(T.self, from: data), response, nil)
         }
     }
     

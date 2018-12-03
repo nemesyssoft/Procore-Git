@@ -14,6 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var window: UIWindow?
     var repo: String?
+    var dataDownloader: DataDownloader?
+    var dataSource: DataSource?
+    var masterTableViewController: MasterViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -23,8 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         splitViewController.delegate = self
 
         let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
-        let controller = masterNavigationController.topViewController as! MasterViewController
-        controller.managedObjectContext = self.persistentContainer.viewContext
+        masterTableViewController = masterNavigationController.topViewController as? MasterViewController
+        masterTableViewController!.managedObjectContext = self.persistentContainer.viewContext
         return true
     }
 
@@ -44,13 +47,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        dataDownloader = DataDownloader.init()
+        dataSource = DataSource.init(withContext: self.persistentContainer.viewContext)
         if repo == nil {
             let alertController = UIAlertController.init(title: "Repo", message: "Enter user and repo:", preferredStyle: UIAlertController.Style.alert)
+            let alertErrorController = UIAlertController.init(title: "Error", message: "", preferredStyle: UIAlertController.Style.alert)
+            let dismissAction = UIAlertAction.init(title: "OK", style: UIAlertAction.Style.default) { (UIAlertAction) in
+                OperationQueue.main.addOperation {
+                    alertErrorController.dismiss(animated: true, completion: nil)
+                }
+            }
+            alertErrorController.addAction(dismissAction)
             let okAction = UIAlertAction.init(title: "OK", style: UIAlertAction.Style.default) { (UIAlertAction) in
                 let textFields = alertController.textFields
                 let userText = textFields![0].text
                 let repoText = textFields![1].text
+                self.masterTableViewController?.user = userText
+                self.masterTableViewController?.repo = repoText
                 self.repo = userText! + "/" + repoText!
+                self.masterTableViewController!.title = "Pull Requests for \(userText ?? "<no user>")/\(repoText ?? "<no repo>")"
+                if self.dataSource?.pullRequestsCount() == 0 {
+                    self.dataDownloader?.downloadPullRequests(user: userText!, repo: repoText!, completionHandler: { (pullRequestJSON: PullRequestJSON?, error: Error?) in
+                        if error != nil {
+                            let errorMessage = """
+                            Error while trying to download pull requests for \(userText ?? "<no user>")/\(repoText ?? "no repo"):
+                            \(error?.localizedDescription ?? "unknown error")
+                            """
+                            alertErrorController.message = errorMessage
+                            OperationQueue.main.addOperation {
+                                self.window!.rootViewController?.present(alertErrorController, animated: true, completion: nil)
+                            }
+                        }
+                        else {
+                            self.dataSource?.savePullRequests(pullRequests: pullRequestJSON!)
+                        }
+                    })
+                }
             }
             
             alertController.addAction(okAction)
